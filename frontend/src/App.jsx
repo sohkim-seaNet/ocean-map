@@ -1,28 +1,22 @@
-import {useEffect, useState} from "react";
+import './index.css';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import Layout from './components/Layout';
+import GebcoMap from './pages/GebcoMap';
+import EtopoMap from './pages/EtopoMap';
 
 function App() {
-
-    const [health, setHealth] = useState('loading...');
-
-    useEffect(() => {
-        fetch('http://localhost:8080/api/health')
-            .then((res) => res.text())
-            .then((text) => setHealth(text))
-            .catch((err) => {
-                console.error(err);
-                setHealth('error');
-            });
-    }, []);
-
     return (
-        <div>
-            <header>
-                <h1>Ocean Map Frontend</h1>
-            </header>
-            <main>
-                <p>지도</p>
-            </main>
-        </div>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                    {/* 루트 경로는 /gebco로 리다이렉트 */}
+                    <Route index element={<Navigate to="/gebco" replace />} />
+                    {/* 자식 라우트들 */}
+                    <Route path="gebco" element={<GebcoMap />} />
+                    <Route path="etopo" element={<EtopoMap />} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
     );
 }
 
