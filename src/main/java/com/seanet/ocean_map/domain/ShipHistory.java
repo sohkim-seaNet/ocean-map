@@ -10,33 +10,30 @@ import org.geolatte.geom.Point;
 
 import java.time.OffsetDateTime;
 
+/**
+ * 선박 위치 이력 정보를 저장하는 JPA 엔티티
+ * public.ships_history 테이블과 매핑
+ */
 @Entity
-@Table(name="ships_current")
+@Table(name = "ships_history")
 @Getter
 @Setter
-public class ShipCurrent {
+public class ShipHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /**
-     * 선박 고유 식별 번호
-     */
+    @Column(nullable = false)
     private Long mmsi;
 
-    private String name;
+    @Column(name = "ts", nullable = false)
+    private OffsetDateTime ts;
+
     private String status;
     private Double heading;
     private Double speed;
 
-    @Column(name = "last_update")
-    private OffsetDateTime lastUpdate;
-
-    /**
-     * 선박의 지리적 위치 (경도, 위도)
-     * PostGIS geometry(Point, 4326) 타입과 매핑
-     */
     @Column(name = "geom", columnDefinition = "geometry(Point,4326)")
     @JdbcTypeCode(SqlTypes.GEOMETRY)
     private Point<G2D> geom;
