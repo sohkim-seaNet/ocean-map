@@ -19,7 +19,9 @@ function CoastlineLayer() {
             map.addSource(COASTLINE_SOURCE_ID, {
                 type: 'raster',
                 tiles: [
-                    `/geoserver/ocean/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&FORMAT=image/png&TRANSPARENT=true&LAYERS=ocean:ne_10m_coastline&SRS=EPSG:3857&WIDTH=256&HEIGHT=256&BBOX={bbox-epsg-3857}`,
+                    `/geoserver/ocean/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap
+                    &FORMAT=image/png&TRANSPARENT=true&LAYERS=ocean:ne_10m_coastline
+                    &SRS=EPSG:3857&WIDTH=256&HEIGHT=256&BBOX={bbox-epsg-3857}`,
                 ],
                 tileSize: 256,
             });

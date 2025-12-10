@@ -18,7 +18,8 @@ function PlaceLabelLayer() {
 
             map.addSource(PLACES_SOURCE_ID, {
                 type: 'geojson',
-                data: '/geoserver/ocean/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ocean:ne_10m_populated_places&outputFormat=application/json',
+                data: '/geoserver/ocean/ows?service=WFS&version=1.0.0&request=GetFeature' +
+                    '&typeName=ocean:ne_10m_populated_places&outputFormat=application/json',
             });
 
             map.addLayer({
