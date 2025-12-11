@@ -3,7 +3,7 @@ import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { MapContext } from '../contexts/MapContext';
 
-function Map({ source, center = [0, -70], zoom = 3, children }) {
+function Map({ source, center = [0, -70], zoom = 3, initialBearing = 0, children }) {
     const mapContainerRef = useRef(null);
     const [mapInstance, setMapInstance] = useState(null);
 
@@ -35,7 +35,8 @@ function Map({ source, center = [0, -70], zoom = 3, children }) {
                 ]
             },
             center,
-            zoom
+            zoom,
+            bearing: initialBearing,
         });
 
         setMapInstance(map);
@@ -44,7 +45,7 @@ function Map({ source, center = [0, -70], zoom = 3, children }) {
             map.remove();
             setMapInstance(null);
         };
-    }, [source, center, zoom]);
+    }, [source, center, zoom, initialBearing]);
 
     return (
         <MapContext.Provider value={mapInstance}>
