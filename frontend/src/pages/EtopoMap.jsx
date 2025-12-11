@@ -1,4 +1,4 @@
-import Map from '../components/Map';
+import Map from '../components/map/Map.jsx';
 import { basemaps } from '../config/basemaps';
 
 function EtopoMap() {
