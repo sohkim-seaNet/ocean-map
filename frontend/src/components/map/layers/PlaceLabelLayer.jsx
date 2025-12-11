@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useMap } from '../contexts/MapContext';
+import { useMap } from '../../../contexts/MapContext.js';
 
 const PLACES_SOURCE_ID = 'places-wfs';
 const PLACES_LAYER_ID = 'places-label';

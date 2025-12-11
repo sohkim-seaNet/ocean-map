@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useMap } from '../contexts/MapContext';
+import { useMap } from '../../../contexts/MapContext.js';
 
 function LiveShipsLayer() {
     const map = useMap();

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
-import { MapContext } from '../contexts/MapContext';
+import { MapContext } from '../../contexts/MapContext.js';
 
 function Map({ source, center = [0, -70], zoom = 3, initialBearing = 0, children }) {
     const mapContainerRef = useRef(null);

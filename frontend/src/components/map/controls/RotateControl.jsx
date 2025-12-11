@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useMap } from '../contexts/MapContext';
+import { useMap } from '../../../contexts/MapContext.js';
 
 function RotateControl() {
     const map = useMap();

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useMap } from '../contexts/MapContext';
+import { useMap } from '../../../contexts/MapContext.js';
 
 /**
  * AnchoredShipsLayer 컴포넌트

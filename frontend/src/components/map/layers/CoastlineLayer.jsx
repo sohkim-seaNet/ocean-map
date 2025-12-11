@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useMap } from '../contexts/MapContext';
+import { useMap } from '../../../contexts/MapContext.js';
 
 const COASTLINE_SOURCE_ID = 'coastline-wms';
 const COASTLINE_LAYER_ID = 'coastline-layer';
