@@ -1,6 +1,7 @@
 import Map from '../components/map/Map.jsx';
 import RotateControl from '../components/map/controls/RotateControl.jsx';
 import CoordinatesControl from '../components/map/controls/CoordinatesControl';
+import OwnShipControl from '../components/map/controls/OwnShipControl';
 import { basemaps } from '../config/basemaps';
 import AnchoredShipsLayer from '../components/map/layers/AnchoredShipsLayer.jsx';
 import LiveShipsLayer from '../components/map/layers/LiveShipsLayer.jsx';
@@ -19,6 +20,7 @@ function GebcoMap() {
 
                 {/* Controls */}
                 <RotateControl />
+                <OwnShipControl />
                 <CoordinatesControl />
             </Map>
         </div>
