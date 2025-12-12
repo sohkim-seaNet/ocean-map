@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { MapContext } from '../../contexts/MapContext.js';
+import { MaplibreExportControl, Size, PageOrientation, Format, DPI } from '@watergis/maplibre-gl-export';
+import '@watergis/maplibre-gl-export/dist/maplibre-gl-export.css';
 
 function Map({ source, center = [0, -70], zoom = 3, initialBearing = 0, children }) {
     const mapContainerRef = useRef(null);
@@ -37,7 +39,18 @@ function Map({ source, center = [0, -70], zoom = 3, initialBearing = 0, children
             center,
             zoom,
             bearing: initialBearing,
+            preserveDrawingBuffer: true
         });
+
+        // Export 컨트롤 추가
+        map.addControl(new MaplibreExportControl({
+            PageSize: Size.A4,
+            PageOrientation: PageOrientation.Landscape,
+            Format: Format.PNG,
+            DPI: DPI[300],
+            Crosshair: true,
+            PrintableArea: true,
+        }), 'top-left');
 
         setMapInstance(map);
 
