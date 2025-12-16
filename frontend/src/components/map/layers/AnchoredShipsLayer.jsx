@@ -1,45 +1,57 @@
 import { useEffect } from 'react';
 import { useMap } from '../../../contexts/MapContext.js';
+import { makeScheduledEnsure } from '../utils/scheduleEnsure.js';
 
-/**
- * AnchoredShipsLayer 컴포넌트
- * GeoServer WMS를 통해 고정된 선박 데이터를 래스터 타일로 표시
- */
+const SOURCE_ID = 'ships';
+const LAYER_ID = 'ships-layer';
+
 function AnchoredShipsLayer() {
     const map = useMap();
 
     useEffect(() => {
         if (!map) return;
 
-        const onLoad = () => {
-            if (map.getSource('ships')) return;
+        const ensure = () => {
+            if (!map.getStyle || !map.getStyle()) return;
 
-            map.addSource('ships', {
-                type: 'raster',
-                tiles: [
-                    '/geoserver/ocean/wms?' +
-                    'service=WMS&request=GetMap&version=1.1.1&' +
-                    'layers=ocean:ships&' +
-                    'styles=&bbox={bbox-epsg-3857}&' +
-                    'width=256&height=256&srs=EPSG:3857&' +
-                    'format=image/png&transparent=true'
-                ],
-                tileSize: 256
-            });
+            if (!map.getSource(SOURCE_ID)) {
+                map.addSource(SOURCE_ID, {
+                    type: 'raster',
+                    tiles: [
+                        '/geoserver/ocean/wms?' +
+                        'service=WMS&request=GetMap&version=1.1.1&' +
+                        'layers=ocean:ships&styles=&' +
+                        'bbox={bbox-epsg-3857}&' +
+                        'width=256&height=256&' +
+                        'srs=EPSG:3857&' +
+                        'format=image/png&transparent=true'
+                    ],
+                    tileSize: 256
+                });
+            }
 
-            map.addLayer({
-                id: 'ships-layer',
-                type: 'raster',
-                source: 'ships'
-            });
+            if (!map.getLayer(LAYER_ID)) {
+                map.addLayer({
+                    id: LAYER_ID,
+                    type: 'raster',
+                    source: SOURCE_ID,
+                    paint: { 'raster-opacity': 1 }
+                });
+            }
+
+            // 항상 최상단
+            map.moveLayer(LAYER_ID);
         };
 
-        if (map.isStyleLoaded()) {
-            onLoad();
-        } else {
-            map.on('load', onLoad);
-            return () => map.off('load', onLoad);
-        }
+        const { schedule, cleanup } = makeScheduledEnsure(map, ensure);
+
+        if (map.isStyleLoaded()) ensure();
+        map.on('styledata', schedule);
+
+        return () => {
+            map.off('styledata', schedule);
+            cleanup();
+        };
     }, [map]);
 
     return null;
