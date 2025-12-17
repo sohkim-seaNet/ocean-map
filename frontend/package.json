@@ -10,11 +10,22 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/material": "^7.3.6",
+    "@turf/area": "^7.3.1",
+    "@turf/bearing": "^7.3.1",
+    "@turf/distance": "^7.3.1",
+    "@turf/length": "^7.3.1",
+    "@turf/turf": "^7.3.1",
     "@watergis/maplibre-gl-export": "^4.1.0",
     "maplibre-gl": "^5.13.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-router-dom": "^7.9.6"
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.9.6",
+    "terra-draw": "^1.20.0",
+    "terra-draw-maplibre-gl-adapter": "^1.2.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
