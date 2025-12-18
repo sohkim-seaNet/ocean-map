@@ -1,3 +1,5 @@
+import * as turf from '@turf/turf';
+
 // 거리 단위
 export const DISTANCE_UNITS = [
     { value: 'meters', label: 'm', factor: 1 },
@@ -119,6 +121,51 @@ export function downloadCSV(measurements, filename = 'measurements') {
     URL.revokeObjectURL(href);
 }
 
+/**
+ * 방향각 계산 (진북 기준 0-360도)
+ * @param {Array} fromCoord - 시작 좌표 [lng, lat]
+ * @param {Array} toCoord - 끝 좌표 [lng, lat]
+ * @returns {number} 방향각 (0-360도)
+ */
+export function calculateBearing(fromCoord, toCoord) {
+    const from = { type: 'Point', coordinates: fromCoord };
+    const to = { type: 'Point', coordinates: toCoord };
+
+    // turf.bearing는 -180 ~ 180도 반환
+    const bearing = turf.bearing(from, to);
+
+    // 0-360도로 정규화
+    return bearing < 0 ? bearing + 360 : bearing;
+}
+
+/**
+ * 방향각 라벨 엘리먼트 생성
+ */
+export function createBearingLabelElement(bearing, isTemporary = false) {
+    const el = document.createElement('div');
+    el.className = isTemporary ? 'bearing-label-temp' : 'bearing-label';
+
+    const bgColor = isTemporary ? 'rgba(76, 175, 80, 0.85)' : 'rgba(96, 125, 139, 0.85)';
+    const borderColor = isTemporary ? 'rgba(76, 175, 80, 1)' : 'rgba(96, 125, 139, 1)';
+
+    el.style.cssText = `
+        background: ${bgColor};
+        color: #ffffff;
+        padding: 4px 8px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 600;
+        pointer-events: none;
+        border: 1.5px solid ${borderColor};
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        white-space: nowrap;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, monospace;
+        letter-spacing: 0.5px;
+        ${isTemporary ? 'opacity: 0.8;' : ''}
+    `;
+    el.textContent = `${bearing.toFixed(1)}°`;
+    return el;
+}
 
 // TerraDraw 스타일 설정
 export const DRAW_STYLES = {
