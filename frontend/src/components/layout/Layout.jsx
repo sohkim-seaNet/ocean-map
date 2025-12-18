@@ -5,7 +5,8 @@ function Layout() {
 
     const navItems = [
         { path: '/gebco', label: 'GEBCO' },
-        { path: '/etopo', label: 'ETOPO' }
+        { path: '/etopo', label: 'ETOPO' },
+        { path: '/layers', label: '레이어 관리' }  // 추가
     ];
 
     return (
@@ -20,9 +21,9 @@ function Layout() {
                             className={`
                                 px-4 py-2 rounded-md text-sm font-medium transition-all
                                 ${location.pathname === item.path
-                                    ? 'bg-blue-500 text-white border-2 border-blue-600 shadow-md'
-                                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-                                }
+                                ? 'bg-blue-500 text-white border-2 border-blue-600 shadow-md'
+                                : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                            }
                             `}
                         >
                             {item.label}
