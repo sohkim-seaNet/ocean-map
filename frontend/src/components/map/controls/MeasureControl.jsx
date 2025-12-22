@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useMap } from '../../../contexts/MapContext.js';
 import * as turf from '@turf/turf';
-import { useMeasureTool } from '../measure/useMeasureTool';
-import { useMeasurementLabels } from '../measure/useMeasurementLabels';
+import { useMeasureTool } from '../hooks/useMeasureTool.js';
+import { useMeasurementLabels } from '../hooks/useMeasurementLabels.js';
 import {
     DISTANCE_UNITS,
     AREA_UNITS,
     downloadGeoJSON,
     downloadCSV
-} from '../measure/measurementUtils';
-import MeasureControlUI from '../measure/MeasureControlUI';
+} from '../utils/measurementUtils.js';
+import MeasureControlUI from './MeasureControlUI.jsx';
 
 /**
  * 측정 도구 컨트롤

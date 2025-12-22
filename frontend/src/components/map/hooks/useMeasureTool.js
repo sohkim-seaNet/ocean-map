@@ -3,7 +3,7 @@ import { TerraDraw } from 'terra-draw';
 import { TerraDrawMapLibreGLAdapter } from 'terra-draw-maplibre-gl-adapter';
 import { TerraDrawLineStringMode, TerraDrawPolygonMode } from 'terra-draw';
 import maplibregl from 'maplibre-gl';
-import { DRAW_STYLES } from './measurementUtils';
+import { DRAW_STYLES } from '../utils/measurementUtils.js';
 
 /**
  * TerraDraw 도구 관리 Hook

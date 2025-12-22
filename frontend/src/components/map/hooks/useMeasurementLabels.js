@@ -6,7 +6,7 @@ import {
     createLabelElement,
     calculateBearing,
     createBearingLabelElement
-} from './measurementUtils';
+} from '../utils/measurementUtils.js';
 
 /**
  * 측정 라벨 관리 Hook (방향각 포함)
